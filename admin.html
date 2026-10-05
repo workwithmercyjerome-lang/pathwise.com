@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PathWise admin</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;margin:0;padding:20px;max-width:1100px;margin:auto;color:#0B2545}input,button{font:inherit;padding:10px 14px;border-radius:10px;border:1px solid #ccd}button{background:#F26A1B;color:#fff;border:0;cursor:pointer}h2{margin-top:32px}.w{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e3e6ec;vertical-align:top}th{background:#f3f5f8}#e{color:#b42318}</style></head><body>
+<h1>PathWise admin</h1><p>Private. Enter your server address and the ADMIN_KEY you set on Render.</p>
+<input id="u" size="38" placeholder="https://YOUR-NAME.onrender.com/api"> <input id="k" type="password" placeholder="Admin key"> <button id="go">Load data</button><p id="e"></p><div id="out"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+$("#u").value=localStorage.getItem("pw_admin_url")||"";
+const T=(h,rows)=>`<div class="w"><table><tr>${h.map(x=>`<th>${x}</th>`).join("")}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${E(c)}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${h.length}">Nothing yet</td></tr>`}</table></div>`;
+const D=d=>d?new Date(d).toLocaleString():"";
+$("#go").onclick=async()=>{$("#e").textContent="Loading… (a sleeping server can take up to a minute)";const u=$("#u").value.replace(/\/$/,"");localStorage.setItem("pw_admin_url",u);
+try{const r=await fetch(u+"/admin/overview",{headers:{"x-admin-key":$("#k").value}}),j=await r.json();if(!j.success){$("#e").textContent=j.message||"Failed";return}$("#e").textContent="";const d=j.data;
+$("#out").innerHTML=`<h2>Users (${d.users.length})</h2>`+T(["Name","Email","Country","Joined","Assessments","Saved careers"],d.users.map(x=>[x.name,x.email,x.country||"",D(x.joined),x.assessments,x.savedCareers]))
++`<h2>Assessments</h2>`+T(["User","When","Country","Stage","Top matches"],d.assessments.map(a=>[a.user+" ("+a.email+")",D(a.when),a.result?.country||"",a.result?.stage||"",(a.result?.top||[]).map(t=>t.name+" "+t.match+"%").join(", ")]))
++`<h2>Saved careers</h2>`+T(["User","Career","When"],d.saved.map(s=>[s.user+" ("+s.email+")",s.career,D(s.when)]))
++`<h2>Contact messages</h2>`+T(["Name","Email","Message","When"],d.messages.map(m=>[m.name,m.email,m.message,D(m.createdAt)]))}catch{$("#e").textContent="Can't reach the server."}};
+</script></body></html>

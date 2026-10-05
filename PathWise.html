@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PathWise – Find your path. Build your future.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F4EF;--ink:#0B2545;--mute:#5D6B80;--line:#D9DDE3;--teal:#0F9D8F;--or:#F26A1B;--panel:#0B2545;--on:#fff;--fill:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#081426;--ink:#EEF2F7;--mute:#9AA9BC;--line:#1E3350;--teal:#2DD4C4;--panel:#0E2340;--fill:#0E2340}}
+:root[data-theme="dark"]{--bg:#081426;--ink:#EEF2F7;--mute:#9AA9BC;--line:#1E3350;--teal:#2DD4C4;--panel:#0E2340;--fill:#0E2340}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 'Manrope',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'DM Serif Display',Georgia,serif;letter-spacing:-.01em;line-height:1.08;font-weight:400}
+h1{font-size:clamp(2.8rem,8vw,6rem)}h2{font-size:clamp(2.1rem,5vw,3.6rem);margin-bottom:14px}
+a{color:inherit;text-decoration:none}:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1160px;margin:auto;padding:0 22px}section{padding:clamp(64px,10vw,130px) 0}
+.lead{color:var(--mute);font-size:1.15rem;max-width:32rem}
+.btn{display:inline-flex;font:600 1rem 'Manrope';padding:15px 28px;border-radius:999px;border:1.5px solid currentColor;background:none;color:inherit;cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}.btn.or{background:var(--or);border-color:var(--or);color:#fff}.btn.sm{padding:9px 20px;font-size:.92rem}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{font:400 1.7rem 'DM Serif Display',serif;letter-spacing:-.02em}.logo b{color:var(--teal)}
+.menu{display:flex;gap:28px;align-items:center;font-weight:500;font-size:.96rem}.menu a:not(.btn):hover{color:var(--teal)}
+#burger{display:none;background:none;border:0;font-size:1.7rem;color:var(--ink);cursor:pointer}
+@media(max-width:860px){#burger{display:block}.menu{display:none;position:fixed;inset:72px 0 auto;background:var(--bg);flex-direction:column;align-items:flex-start;padding:22px;gap:18px}.menu.open{display:flex}}
+
+.hero .wrap{display:grid;gap:44px;align-items:end;padding-top:clamp(28px,6vw,72px)}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.35fr 1fr}}
+.hero .lead{margin:26px 0 34px}.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero h1 span{display:block;color:var(--teal)}
+
+.visual{position:relative;padding:96px 46px 10px 6px}
+.blob{position:absolute;z-index:0;width:112%;height:112%;top:-4%;right:-10%;pointer-events:none}
+.blob path{fill:var(--teal);opacity:.95}
+.frame{position:relative;z-index:1;width:100%;aspect-ratio:11/10;object-fit:cover;border-radius:26px;background:var(--line);display:block;box-shadow:0 30px 60px -30px rgba(11,37,69,.35)}
+.tag{position:absolute;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;width:148px;color:var(--teal);pointer-events:none}
+.tag svg.icon{width:28px;height:28px;margin-bottom:5px}
+.tag span{font:700 1.2rem/1.15 Caveat,cursive;color:var(--teal)}
+.tag svg.scribble{width:92px;height:12px;margin-top:2px}
+.t1{top:4px;left:-22px}
+.t2{top:-6px;right:20%}
+.t3{top:34%;right:-42px}
+@media(max-width:1050px){.t3{right:-10px}}
+@media(max-width:860px){
+  .tag{display:none}
+  .blob{display:none}
+  .frame{
+    width:100%;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+  }
+  .visual{
+    padding:0;
+  }
+}
+@media(min-width:900px){.hero .wrap{align-items:center}}
+.note{border-block:1px solid var(--line);padding:22px 0;color:var(--mute);margin-top:clamp(40px,7vw,90px)}
+.note .wrap{display:flex;flex-wrap:wrap;gap:6px 30px;align-items:baseline}.note b{font:400 clamp(1.7rem,3.5vw,2.4rem) 'DM Serif Display',serif;}
+
+.steps{list-style:none;padding:0;margin-top:48px;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;padding:0 0 34px 0;position:relative}
+.steps li:before{content:"";position:absolute;left:14px;top:32px;bottom:0;width:2px;background:var(--line)}.steps li:last-child:before{display:none}
+.steps span{width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:600;font-size:.85rem;grid-row:span 2;z-index:1}
+.steps h3{font-size:1.5rem}.steps p{color:var(--mute)}
+@media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr);gap:24px}.steps li{grid-template-columns:1fr;padding:0}.steps li:before{left:30px;right:-24px;top:14px;bottom:auto;width:auto;height:2px}.steps span{margin-bottom:22px}}
+
+.band{background:var(--panel);color:#fff;border-radius:40px;margin:0 12px;padding:clamp(36px,6vw,80px) 0}
+.band .wrap{display:grid;gap:40px}@media(min-width:900px){.band .wrap{grid-template-columns:1fr 1.2fr;align-items:center}}
+.band .lead{color:#AFC0D6}.prog{display:flex;gap:6px;margin-bottom:26px}.prog i{flex:1;height:5px;border-radius:9px;background:#ffffff26}.prog i.on{background:var(--teal)}
+.sl{color:#AFC0D6;font-size:.92rem;margin-bottom:8px}.q{font:400 clamp(1.7rem,3.5vw,2.4rem) 'DM Serif Display',serif;letter-spacing:-.01em;line-height:1.1;margin-bottom:24px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{font:500 1.02rem 'Manrope';padding:12px 22px;border-radius:999px;border:1.5px solid #ffffff40;background:none;color:#fff;cursor:pointer;transition:all .2s}
+.opt:hover{border-color:var(--teal)}.opt[aria-pressed=true]{background:#fff;color:var(--ink);border-color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:30px;gap:10px}.row .btn:not(.or){color:#fff}.hint{color:#AFC0D6;font-size:.9rem}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 8px}
+.search{flex:1 1 240px;padding:14px 22px;border-radius:999px;border:1.5px solid var(--line);background:var(--fill);color:var(--ink);font:inherit}
+.cat{font:500 .95rem 'Manrope';padding:8px 18px;border-radius:999px;border:1.5px solid var(--line);background:none;color:var(--ink);cursor:pointer}.cat[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.why{display:none;margin:18px 0;padding-left:16px;border-left:3px solid var(--teal);color:var(--mute)}.why.on{display:block}.why b{color:var(--ink)}
+.list{margin-top:22px;border-top:1px solid var(--line)}
+.item{border-bottom:1px solid var(--line)}
+.head{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:center;padding:24px 0;background:none;border:0;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.head h3{font-size:clamp(1.6rem,3.6vw,2.4rem);transition:color .2s,transform .3s}.head:hover h3{color:var(--teal);transform:translateX(8px)}
+.head small{color:var(--mute);grid-column:1}.pill{grid-row:span 2;grid-column:2;font-weight:600;color:var(--or)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}.item.open .more{grid-template-rows:1fr}.more>div{overflow:hidden}
+.prof{display:grid;gap:22px;padding:4px 0 30px}@media(min-width:800px){.prof{grid-template-columns:1.2fr 1fr 1fr}}
+.prof h4{font:600 .95rem 'Manrope';margin-bottom:4px}.prof p{color:var(--mute);font-size:.98rem}
+.acts{display:flex;flex-wrap:wrap;gap:8px;grid-column:1/-1}
+.tog[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#fff}
+.empty{padding:40px 0;color:var(--mute)}
+
+.cmp{margin-top:34px;overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:20px 24px 20px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:400 1.6rem 'DM Serif Display',serif;letter-spacing:-.02em}td:first-child{color:var(--mute);font-weight:600;width:150px}
+
+.two{display:grid;gap:44px}@media(min-width:900px){.two{grid-template-columns:1fr 1fr;align-items:center}}
+.skill{display:flex;gap:14px;align-items:center;width:100%;padding:16px 0;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:500 1.15rem 'Manrope';cursor:pointer;text-align:left}
+.skill i{width:24px;height:24px;border-radius:50%;border:2px solid var(--mute);display:grid;place-items:center;color:#fff;font-size:.8rem;font-style:normal;transition:all .25s}
+.skill[aria-pressed=true] i{background:var(--teal);border-color:var(--teal)}.skill[aria-pressed=true] span{color:var(--mute);text-decoration:line-through}
+.res{margin:18px 0 26px;color:var(--mute);min-height:3.2em}.res b{color:var(--ink)}
+
+.mgrid{display:grid;gap:22px;margin-top:38px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.mentor img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:28px 28px 999px 28px;background:var(--line);margin-bottom:16px}
+.mentor h3{font-size:1.5rem}.mentor p{color:var(--mute);margin:2px 0 14px}
+.final{text-align:center}.final p{color:var(--mute);margin:16px auto 32px;max-width:34rem}.final .cta{justify-content:center}
+footer{border-top:1px solid var(--line);padding:56px 0 40px;color:var(--mute);font-size:.95rem}
+footer .cols{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}footer a{display:block;padding:3px 0}footer a:hover{color:var(--teal)}footer b{color:var(--ink);display:block;margin-bottom:8px}
+footer form{display:flex;gap:8px;margin-top:12px}footer input{flex:1;min-width:0;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--fill);color:var(--ink);font:inherit}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140px);background:var(--ink);color:var(--bg);padding:12px 24px;border-radius:999px;font-weight:600;transition:transform .35s cubic-bezier(.3,1.3,.5,1);z-index:20}.toast.on{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+
+.ctybar{background:var(--panel);color:#fff;font-size:.92rem}.ctybar .wrap{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding-top:9px;padding-bottom:9px}.ctybar span{color:#AFC0D6;margin-right:4px}
+.ctybar button{font:600 .9rem 'Manrope';padding:6px 14px;border-radius:999px;border:1.5px solid #ffffff40;background:none;color:#fff;cursor:pointer}.ctybar button[aria-pressed=true]{background:#fff;color:var(--ink);border-color:#fff}
+.grid3{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:30px}.gc{background:var(--fill);border:1px solid var(--line);border-radius:22px;padding:24px}.gc h3{font-size:1.4rem;margin-bottom:8px}.gc p{color:var(--mute);font-size:.98rem}
+.rt{min-width:0;font-size:.9rem}.rt td{padding:8px 10px 8px 0}.lk{display:block;padding:9px 0;border-bottom:1px solid var(--line);color:var(--mute)}.lk b{color:var(--teal)}
+dialog{border:1px solid var(--line);border-radius:24px;padding:28px;max-width:420px;width:calc(100% - 32px);background:var(--bg);color:var(--ink)}dialog::backdrop{background:#0008}
+dialog input,.cf input,.cf textarea,select#target{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--fill);color:var(--ink);font:inherit;margin:6px 0 12px}
+.msg{display:none;padding:12px 16px;border-radius:12px;margin-bottom:12px;font-weight:600;font-size:.92rem}.msg.on{display:block}.msg.error{background:#FDECE4;color:#9A3412}
+.faq details{border-bottom:1px solid var(--line)}.faq summary{cursor:pointer;padding:16px 0;font:400 1.25rem 'DM Serif Display',serif}.faq p{color:var(--mute);padding:0 0 16px}.cf{max-width:520px;margin-top:28px}
+.meta{color:var(--mute);font-size:.88rem}.srow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0}#profile[hidden]{display:none}
+</style>
+</head>
+<body>
+<div class="ctybar"><div class="wrap" id="ctyBar" role="group" aria-label="Choose your country"></div></div>
+<nav aria-label="Main"><div class="wrap">
+<a href="#top" class="logo" aria-label="PathWise home">Path<b>Wise</b></a>
+<button id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+<div class="menu" id="menu"><a href="#assess">Assessment</a><a href="#careers">Careers</a><a href="#compare">Compare</a><a href="#mentors">Mentors</a><span id="authLinks" style="display:contents"></span><a href="#assess" class="btn or sm">Take Career Assessment</a></div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<div>
+<h1>Find your path.<span>Build your future.</span></h1>
+<p class="lead">Not sure what career is right for you? PathWise helps you understand your strengths, discover suitable career options, compare your choices, and take the next step with confidence.</p>
+<div class="cta"><a class="btn or" href="#assess">Take Career Assessment</a><a class="btn" href="#careers">Explore Careers</a></div>
+</div>
+<div class="visual">
+<svg class="blob" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true"><path d="M60,40 C160,-10 320,10 360,110 C400,210 350,330 230,370 C110,410 10,340 15,220 C18,140 -20,80 60,40 Z"/></svg>
+<img class="frame" src="images/hero.jpg" alt="Students in Nigeria and Ghana exploring career paths together on a laptop" data-ph="Hero photo">
+<div class="tag t1" aria-hidden="true">
+<svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L24 9 L44 18 L24 27 Z"/><path d="M13 22 V32 Q24 39 35 32 V22"/><path d="M44 18 V29"/></svg>
+<span>Explore Your<br>Options</span>
+<svg class="scribble" viewBox="0 0 96 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 8 Q24 2 48 7 T93 6"/></svg>
+</div>
+<div class="tag t2" aria-hidden="true">
+<svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="25" r="14"/><path d="M26 18 L19 23 L16 32 L23 27 Z"/><path d="M38 7 L40 11 L44 13 L40 15 L38 19 L36 15 L32 13 L36 11 Z"/></svg>
+<span>Build Your<br>Future</span>
+<svg class="scribble" viewBox="0 0 96 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 8 Q24 2 48 7 T93 6"/></svg>
+</div>
+<div class="tag t3" aria-hidden="true">
+<svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 40 H42"/><rect x="10" y="26" width="7" height="14" rx="1.5"/><rect x="21" y="18" width="7" height="22" rx="1.5"/><rect x="32" y="10" width="7" height="30" rx="1.5"/></svg>
+<span>Turn Dreams<br>Into Plans</span>
+<svg class="scribble" viewBox="0 0 96 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 8 Q24 2 48 7 T93 6"/></svg>
+</div>
+</div>
+</div>
+<div class="note"><div class="wrap"><b>Built for the next generation of African professionals.</b><span>Guidance for students and young professionals navigating education and careers in Nigeria and Ghana.</span></div></div>
+</header>
+
+<section><div class="wrap">
+<h2>Four steps from unsure to ready.</h2>
+<ol class="steps">
+<li><span>1</span><h3>Assess</h3><p>Tell us about your interests, skills, education and preferences.</p></li>
+<li><span>2</span><h3>Discover</h3><p>Get career recommendations based on your profile.</p></li>
+<li><span>3</span><h3>Compare</h3><p>Understand how options, requirements and pathways differ.</p></li>
+<li><span>4</span><h3>Take action</h3><p>Find skill gaps, access resources, get guidance and track progress.</p></li>
+</ol></div></section>
+
+<div class="band" id="assess"><div class="wrap">
+<div><h2>Your career path starts with understanding yourself.</h2><p class="lead">Eight quick questions. No exam, no wrong answers.</p></div>
+<div id="quiz" aria-live="polite"><div class="prog" id="prog"></div><div class="sl" id="sl"></div><div class="q" id="q"></div><div class="opts" id="opts"></div>
+<div class="row"><button class="btn sm" id="back">Back</button><span class="hint" id="qh"></span><button class="btn or sm" id="next">Next</button></div></div>
+</div></div>
+
+<section id="careers"><div class="wrap">
+<h2>Careers that match your interests and strengths.</h2>
+<p class="lead">Browse freely, or take the assessment to rank them for you.</p>
+<div class="tools"><input class="search" id="search" type="search" placeholder="Search careers…" aria-label="Search careers"></div>
+<div id="cats" style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="Categories"></div>
+<div class="why" id="why"></div><div class="list" id="list"></div>
+</div></section>
+
+<section id="compare" style="padding-top:0"><div class="wrap">
+<h2>Still deciding between two paths?</h2>
+<p class="lead">Open a career above and choose Compare on two of them.</p>
+<div class="cmp" id="cmp"></div></div></section>
+
+<section><div class="wrap two">
+<div><h2>Know what you need to learn next.</h2><p class="lead">Choose a target career, then tap the skills you already have.</p><select id="target" aria-label="Target career"></select><div class="res" id="res"></div><a class="btn" href="#resources">View Learning Resources</a></div>
+<div id="skills"></div></div></section>
+
+<section id="mentors" style="padding-top:0"><div class="wrap">
+<h2>You don't have to figure it out alone.</h2><p class="lead">Ask a career guide about your next move. Mentor profiles below are demo content.</p>
+<div class="mgrid" id="mgrid"></div></div></section>
+
+<section id="profile" hidden><div class="wrap"><h2>My profile</h2><p class="lead" id="pInfo"></p>
+<div class="grid3"><div class="gc"><h3>Latest results</h3><div id="pLatest"></div></div><div class="gc"><h3>Saved careers</h3><div id="pSaved"></div></div><div class="gc"><h3>Assessment history</h3><div id="pHist"></div></div></div></div></section>
+<section id="guide"><div class="wrap"><h2 id="gT">Your path</h2><p class="lead">How school exams, admission and professional bodies work where you study. Always confirm details with the institution.</p><div id="gBody"></div></div></section>
+<section id="resources" style="padding-top:0"><div class="wrap"><h2>Learning resources.</h2><p class="lead">Official bodies for your country and free ways to build skills. Links open external sites; check them for current details.</p><div class="grid3" id="rBody"></div></div></section>
+<section id="faq" style="padding-top:0"><div class="wrap faq"><h2>Questions and contact.</h2>
+<details><summary>Do I need an account?</summary><p>No. You can take the assessment and browse careers without one. An account saves your results and favourite careers.</p></details>
+<details><summary>How are matches calculated?</summary><p>Your answers build a profile across eight areas (such as science, numbers and creativity). Each career has its own profile, and the percentage shows how closely the two line up. It is guidance, not a test of ability.</p></details>
+<details><summary>Is this official admission advice?</summary><p>No. Cut-off marks, fees and requirements change by institution and year. Confirm with the school, exam body or professional regulator.</p></details>
+<details><summary>Forgot your password?</summary><p>Password reset is not available yet. Use the contact form below.</p></details>
+<form class="cf" id="cForm"><label for="cN">Name</label><input id="cN" required><label for="cE">Email</label><input id="cE" type="email" required><label for="cM">Message</label><textarea id="cM" rows="4" minlength="10" required></textarea><button class="btn or">Send message</button></form></div></section>
+<dialog id="dlg"><h2 id="aT" style="font-size:2rem"></h2><div class="msg" id="aMsg" role="alert"></div><form id="aForm" novalidate><div id="aName"><label for="aN">Full name</label><input id="aN" autocomplete="name"></div><label for="aE">Email</label><input id="aE" type="email" autocomplete="email"><label for="aP">Password</label><input id="aP" type="password" autocomplete="current-password"><button class="btn or" id="aSub" style="width:100%"></button></form><p id="aSw" style="margin-top:14px;color:var(--mute)"></p><button class="btn sm" id="aClose" style="margin-top:12px">Close</button></dialog>
+<section class="final"><div class="wrap"><h2>Ready to find your path?</h2><p>Discover careers that match your interests, understand what they require, and take your next step with PathWise.</p>
+<div class="cta"><a class="btn or" href="#assess">Take Career Assessment</a><a class="btn" href="#careers">Explore Careers</a></div></div></section>
+
+<footer><div class="wrap"><div class="cols">
+<div><b class="serif" style="font-size:1.4rem">PathWise</b>Find your path. Build your future.<form id="news"><input type="email" required placeholder="Your email" aria-label="Newsletter email"><button class="btn sm or">Join</button></form></div>
+<div><b>Explore</b><a href="#assess">Career Assessment</a><a href="#careers">Careers</a><a href="#compare">Compare Careers</a><a href="#mentors">Mentors</a></div>
+<div><b>Resources</b><a href="#guide">Country Guide</a><a href="#resources">Learning Resources</a></div>
+<div><b>Help</b><a href="#faq">Contact and FAQs</a></div>
+<div><b>Account</b><a href="#" data-auth="signin">Sign in</a><a href="#" data-auth="signup">Create account</a></div>
+</div></div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// After deploying the backend, set this to https://YOUR-NAME.onrender.com/api
+const API_URL = "http://localhost:4000/api";
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SAMPLE=[{"id": "1", "name": "Software Engineering", "category": "Technology", "description": "Design and build the apps and systems people use every day.", "skills": ["Problem solving", "JavaScript", "Git & GitHub"], "educationPathway": "BSc Computer Science, or a bootcamp plus a strong portfolio", "qualifications": "Mathematics, English, Physics or ICT", "relatedJobRoles": ["Frontend Developer", "Backend Developer", "QA Engineer"], "industries": ["Fintech", "Telecoms", "E-commerce"], "tags": ["tech", "problem", "build"]}, {"id": "2", "name": "Data Analysis", "category": "Technology", "description": "Turn raw numbers into answers that help organisations decide.", "skills": ["Excel", "SQL", "Critical thinking"], "educationPathway": "BSc in Statistics, Maths, Economics or similar", "qualifications": "Mathematics, Economics, ICT", "relatedJobRoles": ["Data Analyst", "BI Analyst"], "industries": ["Banking", "Health", "Government"], "tags": ["tech", "problem", "numbers"]}, {"id": "3", "name": "Medicine", "category": "Health", "description": "Diagnose illness and care for patients across their lifetime.", "skills": ["Empathy", "Biology", "Decision making"], "educationPathway": "MBBS or MBChB, then housemanship and specialisation", "qualifications": "Biology, Chemistry, Physics, Mathematics", "relatedJobRoles": ["Medical Doctor", "Surgeon"], "industries": ["Hospitals", "Public health", "Research"], "tags": ["people", "science", "help"]}, {"id": "4", "name": "Architecture", "category": "Engineering", "description": "Shape buildings and spaces that are useful and beautiful.", "skills": ["Drawing", "3D modelling", "Creativity"], "educationPathway": "BSc Architecture plus Master's for registration", "qualifications": "Mathematics, Physics, Fine Art", "relatedJobRoles": ["Architect", "Urban Designer"], "industries": ["Construction", "Real estate"], "tags": ["creative", "build", "problem"]}, {"id": "5", "name": "Digital Marketing", "category": "Business", "description": "Help brands reach and grow audiences online.", "skills": ["Storytelling", "Social media", "Analytics"], "educationPathway": "Degree in Marketing or Communication, or certified short courses", "qualifications": "English, Economics, Business Studies", "relatedJobRoles": ["Social Media Manager", "SEO Specialist"], "industries": ["Retail", "Media", "Startups"], "tags": ["creative", "people", "business"]}, {"id": "6", "name": "Product Management", "category": "Business", "description": "Decide what gets built, for whom, and why.", "skills": ["Communication", "User research", "Prioritisation"], "educationPathway": "Any degree, plus experience in tech, design or business", "qualifications": "English, Mathematics, Economics", "relatedJobRoles": ["Associate PM", "Product Owner"], "industries": ["Technology", "Fintech", "Consulting"], "tags": ["tech", "business", "people", "problem"]}, {"id": "7", "name": "Law", "category": "Law", "description": "Advise, represent and argue for people and organisations.", "skills": ["Research", "Public speaking", "Writing"], "educationPathway": "LLB, then Law School and call to the Bar", "qualifications": "English, Literature, Government, History", "relatedJobRoles": ["Lawyer", "Legal Adviser"], "industries": ["Courts", "Corporate", "NGOs"], "tags": ["people", "help", "words"]}, {"id": "8", "name": "Graphic Design", "category": "Creative Arts", "description": "Communicate ideas through image, type and layout.", "skills": ["Typography", "Figma", "Creativity"], "educationPathway": "Diploma or degree in design, or a self-taught portfolio", "qualifications": "Fine Art, Technical Drawing, ICT", "relatedJobRoles": ["Brand Designer", "UI Designer"], "industries": ["Advertising", "Media", "Tech"], "tags": ["creative", "tech", "words"]}, {"id": "9", "name": "Electrical Engineering", "category": "Engineering", "description": "Design, build and maintain power, electronics and control systems.", "skills": ["Circuit analysis", "Mathematics", "Problem solving"], "educationPathway": "BEng or BSc Electrical/Electronic Engineering, then professional registration", "qualifications": "Mathematics, Physics, Chemistry, English", "relatedJobRoles": ["Electrical Engineer", "Power Systems Engineer", "Control Engineer"], "industries": ["Power", "Telecoms", "Manufacturing"], "tags": ["build", "numbers", "tech"]}, {"id": "10", "name": "Civil Engineering", "category": "Engineering", "description": "Plan and build roads, bridges, water systems and buildings.", "skills": ["Structural analysis", "Mathematics", "Project management"], "educationPathway": "BEng or BSc Civil Engineering, then professional registration", "qualifications": "Mathematics, Physics, Chemistry, English", "relatedJobRoles": ["Civil Engineer", "Site Engineer", "Structural Engineer"], "industries": ["Construction", "Government", "Infrastructure"], "tags": ["build", "numbers"]}, {"id": "11", "name": "Agriculture", "category": "Agriculture", "description": "Grow food and manage land, crops, livestock and agribusiness.", "skills": ["Crop and soil science", "Farm management", "Agribusiness"], "educationPathway": "BSc Agriculture or Agricultural Science, or practical training plus short courses", "qualifications": "Biology, Chemistry, Mathematics, Agricultural Science", "relatedJobRoles": ["Agronomist", "Farm Manager", "Agribusiness Officer"], "industries": ["Farming", "Food processing", "Research"], "tags": ["science", "build", "business"]}, {"id": "12", "name": "Nursing", "category": "Health", "description": "Care for patients and support doctors in hospitals and communities.", "skills": ["Patient care", "Communication", "Biology"], "educationPathway": "BNSc or nursing school diploma, then registration with the nursing council", "qualifications": "Biology, Chemistry, Physics, English", "relatedJobRoles": ["Registered Nurse", "Midwife", "Community Health Nurse"], "industries": ["Hospitals", "Public health", "Clinics"], "tags": ["people", "science", "help"]}, {"id": "13", "name": "Pharmacy", "category": "Health", "description": "Prepare medicines, advise patients and ensure safe drug use.", "skills": ["Chemistry", "Attention to detail", "Patient advice"], "educationPathway": "BPharm or PharmD, then internship and registration", "qualifications": "Chemistry, Biology, Physics, Mathematics", "relatedJobRoles": ["Pharmacist", "Hospital Pharmacist", "Regulatory Officer"], "industries": ["Pharmacies", "Hospitals", "Pharmaceuticals"], "tags": ["science", "people", "numbers"]}, {"id": "14", "name": "Accounting", "category": "Business", "description": "Track, audit and plan money for people and organisations.", "skills": ["Bookkeeping", "Excel", "Ethics"], "educationPathway": "BSc Accounting, then professional exams (ICAN, ANAN or ICAG)", "qualifications": "Mathematics, English, Economics, Accounting", "relatedJobRoles": ["Accountant", "Auditor", "Tax Analyst"], "industries": ["Banking", "Government", "Consulting"], "tags": ["numbers", "business"]}];
+
+const TL={t:0,n:1,s:2,p:3,c:4,w:5,b:6,x:7},TN=["technology","numbers","science","helping people","creativity","communication","building things","business"];
+const X={"Software Engineering":["32101021",0],"Data Analysis":["33100102",0],"Medicine":["01330100",1],"Architecture":["12003031",1],"Digital Marketing":["11023203",0],"Product Management":["21021213",0],"Law":["00020301",1],"Graphic Design":["10003111",0],"Electrical Engineering":["23200030",0],"Civil Engineering":["03101031",0],"Agriculture":["01310022",0],"Nursing":["00330100",0],"Pharmacy":["02320001",1],"Accounting":["13010103",0]};
+const REG={Medicine:["Medical and Dental Council of Nigeria (MDCN)","Ghana Medical and Dental Council"],Law:["Nigerian Law School and the Nigerian Bar Association","Ghana School of Law and the Ghana Bar Association"],Architecture:["Architects Registration Council of Nigeria (ARCON)","Ghana Institute of Architects and the Architects Registration Council"],"Electrical Engineering":["Council for the Regulation of Engineering in Nigeria (COREN)","Ghana Institution of Engineering (GhIE)"],"Civil Engineering":["COREN","Ghana Institution of Engineering (GhIE)"],Nursing:["Nursing and Midwifery Council of Nigeria","Nursing and Midwifery Council of Ghana"],Pharmacy:["Pharmacists Council of Nigeria (PCN)","Pharmacy Council of Ghana"],Accounting:["ICAN or ANAN","Institute of Chartered Accountants, Ghana (ICAG)"]};
+const CD={NG:{n:"Nigeria",f:"🇳🇬",i:0,exam:"Most students sit WAEC or NECO (SSCE) and the UTME run by JAMB. Many universities then add a post-UTME screening.",entry:"Usually five credits including English and Mathematics, plus the subjects your course requires.",links:[["JAMB","https://www.jamb.gov.ng","UTME registration and admissions"],["NECO","https://www.neco.gov.ng","National exams and results"],["WAEC Nigeria","https://www.waecnigeria.org","WASSCE for school candidates"],["NUC","https://www.nuc.edu.ng","Approved universities and programmes"]]},
+GH:{n:"Ghana",f:"🇬🇭",i:1,exam:"Students sit the WASSCE run by WAEC Ghana. Universities and colleges admit applicants directly, and GTEC accredits institutions.",entry:"Usually passes in the core subjects (English, Mathematics, Integrated Science, Social Studies) plus the elective subjects your programme requires.",links:[["WAEC Ghana","https://www.waecgh.org","WASSCE information"],["GTEC","https://www.gtec.edu.gh","Accredited tertiary institutions"]]},
+XX:{n:"your country",f:"🌍",i:-1,exam:"Exams and admission rules differ by country. Check your national exam board and higher-education regulator.",entry:"Requirements vary by institution, so confirm subjects and grades with the school you want.",links:[]}};
+const GL=[["freeCodeCamp","https://www.freecodecamp.org","Free coding, web and data courses"],["Khan Academy","https://www.khanacademy.org","Maths, science and economics from basics"],["Coursera","https://www.coursera.org","University courses; financial aid available"],["Google Career Certificates","https://grow.google/certificates/","Job-focused data, UX and IT certificates"]];
+const Q=[["It's a free Saturday. What would you enjoy most?","s",[["Building or fixing something","b2t1"],["Sketching, designing or making content","c2w1"],["Helping a friend work through a problem","p2w1"],["Planning a small business or sale","x2n1"],["Reading about how the body or nature works","s2p1"],["Solving a puzzle or writing code","t2n1"]]],
+["Which subjects are you best at? (up to 3)","m",[["Mathematics","n2t1"],["Physics","s1b1t1"],["Chemistry","s2"],["Biology","s2p1"],["English / Literature","w2"],["Economics / Commerce","x2n1"],["Fine Art / Technical Drawing","c2b1"],["Government / History","w1p1"],["ICT / Computer Studies","t2"]]],
+["Which problem would you rather solve?","s",[["Why a patient is not recovering","s2p2"],["Why a company is losing money","x2n1"],["How to make a bridge safer","b2n1"],["Why nobody notices a brand","c2x1"],["How to defend a client fairly","w2p1"],["How to automate a slow manual process","t2n1"]]],
+["Where could you see yourself working?","m",[["Hospital or lab","s2p1"],["Office with screens","t1n1x1"],["Building site or workshop","b2"],["Design studio","c2"],["Courtroom, newsroom or meetings","w2p1"],["Farm or outdoors","s1b1"]]],
+["Which strengths sound like you?","m",[["Logical thinking","n1t1"],["Patience and care","p2"],["Persuading people","w1x1"],["Imagination","c2"],["Attention to detail","n1s1"],["Leading and organising","x2p1"]]],
+["What matters most in your future work?","s",[["Helping people","p2s1"],["Earning well","x2"],["Creating new things","c1t1b1"],["Solving hard problems","t1n1s1"],["Being my own boss","x2b1"]]],
+["How long are you willing to train before earning?","tr",[["2 years or less (certificates, short courses)","short"],["About 4 years (a degree)","mid"],["5 years or more (professional training)","long"]]],
+["Where are you right now?","st",[["Secondary school","school"],["University","uni"],["Recent graduate","grad"],["Changing careers","change"]]]];
+const STAGE={school:"Check the subject combination your top career needs before you choose or change subjects.",uni:"Look for an internship and one project that shows the skills for",grad:"Build proof of work and ask a professional about entry routes into",change:"List the skills you already have; short courses can bridge the gap into"};
+const st={c:SAMPLE,step:0,ans:Q.map(()=>[]),cat:"All",m:null,open:null,saved:new Set(JSON.parse(localStorage.getItem("pw_guest")||"[]")),cmp:[],have:new Set,cty:localStorage.getItem("pw_cty")||"",mode:"signin"};
+const tok=()=>localStorage.getItem("pw_token"),pwUser=()=>{try{return JSON.parse(localStorage.getItem("pw_user"))}catch{return null}},loggedIn=()=>!!tok()&&!!pwUser();
+const logout=()=>{localStorage.removeItem("pw_token");localStorage.removeItem("pw_user")};
+const toast=t=>{const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e.h);e.h=setTimeout(()=>e.classList.remove("on"),2600)};
+
+async function api(path,opt={},ms=25000){const c=new AbortController(),id=setTimeout(()=>c.abort(),ms);
+try{const r=await fetch(API_URL+path,{...opt,signal:c.signal,headers:{"Content-Type":"application/json",...(tok()?{Authorization:"Bearer "+tok()}:{})}});const j=await r.json().catch(()=>({}));
+if(r.status===401&&tok()&&!path.startsWith("/auth/")){logout();authLinks();profile();toast("Your session expired. Please sign in again.")}
+return{ok:!!j.success,status:r.status,data:j.data,message:j.message}}
+catch(e){return{ok:false,status:0,message:e.name==="AbortError"?"The server is waking up. Please try again in a moment.":"Can't reach the PathWise server."}}finally{clearTimeout(id)}}
+const ph=l=>"data:image/svg+xml,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'><rect width='400' height='500' fill='#d9dde3'/><circle cx='200' cy='210' r='46' fill='#b5bcc7'/><path d='M110 400c0-60 40-96 90-96s90 36 90 96z' fill='#b5bcc7'/><text x='200' y='455' text-anchor='middle' font-family='sans-serif' font-size='18' fill='#5D6B80'>${l} · replace image</text></svg>`);
+document.addEventListener("error",e=>{if(e.target.tagName==="IMG"&&!e.target.dataset.done){e.target.dataset.done=1;e.target.src=ph(e.target.dataset.ph||"Photo")}},true);
+$("#burger").onclick=e=>e.target.setAttribute("aria-expanded",$("#menu").classList.toggle("open"));
+$("#menu").onclick=e=>e.target.tagName==="A"&&$("#menu").classList.remove("open");
+
+function authLinks(){const u=pwUser();$("#authLinks").innerHTML=loggedIn()?`<span style="color:var(--mute)">Hi, ${esc(String(u.name||"student").split(" ")[0])}</span><a href="#profile">My profile</a><a href="#" id="signout">Sign out</a>`:`<a href="#" data-auth="signin">Sign in</a><a href="#" data-auth="signup" class="btn sm">Create account</a>`;
+const so=$("#signout");if(so)so.onclick=e=>{e.preventDefault();logout();location.reload()}}
+function openAuth(m){st.mode=m;const s=m==="signup";$("#aT").textContent=s?"Create your account":"Welcome back";$("#aName").style.display=s?"block":"none";$("#aSub").textContent=s?"Create account":"Sign in";$("#aSw").innerHTML=s?'Have an account? <a href="#" data-auth="signin">Sign in</a>':'New here? <a href="#" data-auth="signup">Create an account</a>';$("#aMsg").className="msg";$("#dlg").showModal()}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-auth]");if(a){e.preventDefault();openAuth(a.dataset.auth)}});
+$("#aClose").onclick=()=>$("#dlg").close();
+$("#aForm").onsubmit=async e=>{e.preventDefault();const s=st.mode==="signup",n=$("#aN").value.trim(),em=$("#aE").value.trim(),pw=$("#aP").value,m=$("#aMsg"),bad=t=>{m.textContent=t;m.className="msg on error"};
+if(s&&!n)return bad("Please enter your full name.");if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))return bad("That email address doesn't look right.");if(!pw||(s&&pw.length<8))return bad(s?"Password must be at least 8 characters.":"Please enter your password.");
+const b=$("#aSub");b.disabled=true;const r=await api("/auth/"+(s?"signup":"login"),{method:"POST",body:JSON.stringify(s?{name:n,email:em,password:pw,country:st.cty||"XX"}:{email:em,password:pw})},45000);b.disabled=false;
+if(!r.ok)return bad(r.message||"Something went wrong.");
+localStorage.setItem("pw_token",r.data.token);localStorage.setItem("pw_user",JSON.stringify(r.data.user));
+await Promise.all([...st.saved].map(id=>api("/careers/"+id+"/save",{method:"POST"})));localStorage.removeItem("pw_guest");
+const sv=await api("/me/saved-careers");if(sv.ok)sv.data.careers.forEach(c=>st.saved.add(c.id));
+$("#dlg").close();authLinks();profile();render();toast(s?"Account created":"Signed in")};
+
+const cd=()=>CD[st.cty]||CD.XX,lbl=()=>st.cty?cd().n:"your country";
+function country(){$("#ctyBar").innerHTML=`<span>Where are you studying?</span>`+["NG", "GH", "XX"].map(k=>`<button data-k="${k}" aria-pressed="${st.cty===k}">${CD[k].f} ${k==="XX"?"Other Africa":CD[k].n}</button>`).join("");
+const c=cd(),regs=Object.entries(REG).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v[c.i]||"Check your national regulator")}</td></tr>`).join("");
+$("#gBody").innerHTML=`<div class="grid3"><div class="gc"><h3>Exams</h3><p>${esc(c.exam)}</p></div><div class="gc"><h3>Entry requirements</h3><p>${esc(c.entry)}</p></div><div class="gc"><h3>Professional bodies</h3>${c.i>=0?`<table class="rt">${regs}</table>`:"<p>Search for the professional body in your country for any regulated career.</p>"}</div></div>`;
+$("#rBody").innerHTML=[...(c.links.length?[["Exam and admission bodies",c.links]]:[]),["Skill building (free and low-cost)",GL]].map(([h,l])=>`<div class="gc"><h3>${h}</h3>${l.map(x=>`<a class="lk" href="${x[1]}" target="_blank" rel="noopener"><b>${x[0]}</b> – ${x[2]}</a>`).join("")}</div>`).join("");
+$("#gT").textContent=`Your path in ${lbl()}`;render()}
+$("#ctyBar").onclick=e=>{const b=e.target.closest("[data-k]");if(b){st.cty=b.dataset.k;localStorage.setItem("pw_cty",st.cty);country();toast("Showing guidance for "+cd().n)}};
+
+function quiz(){const q=Q[st.step],a=st.ans[st.step],multi=q[1]==="m";$("#prog").innerHTML=Q.map((_,i)=>`<i class="${i<=st.step?"on":""}"></i>`).join("");$("#sl").textContent=`Question ${st.step+1} of ${Q.length}`;$("#q").textContent=q[0];
+$("#opts").innerHTML=q[2].map((o,i)=>`<button class="opt" aria-pressed="${a.includes(i)}" data-i="${i}">${esc(o[0])}</button>`).join("");$("#qh").textContent=multi?(st.step===1?"Pick up to 3":"Pick one or more"):"Choose one";
+$("#back").style.visibility=st.step?"visible":"hidden";$("#next").textContent=st.step===Q.length-1?"See my matches":"Next";$("#next").disabled=!a.length}
+$("#opts").onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const i=+b.dataset.i,a=st.ans[st.step],q=Q[st.step];
+if(q[1]!=="m")st.ans[st.step]=[i];else{const x=a.indexOf(i);if(x>=0)a.splice(x,1);else if(st.step===1&&a.length>=3)toast("Pick up to 3 subjects");else a.push(i)}quiz()};
+$("#back").onclick=()=>{st.step--;quiz()};
+$("#next").onclick=async()=>{if(st.step<Q.length-1){st.step++;return quiz()}
+const u=Array(8).fill(0);Q.forEach((q,k)=>{if("sm".includes(q[1]))st.ans[k].forEach(i=>[...q[2][i][1].matchAll(/([tnspcwbx])(\d)/g)].forEach(m=>u[TL[m[1]]]+=+m[2]))});
+const train=Q[6][2][st.ans[6][0]][1],stage=Q[7][2][st.ans[7][0]][1],un=Math.hypot(...u)||1;
+st.m={};st.c.forEach(c=>{const x=X[c.name]||["00000000",0],w=[...x[0]].map(Number),wn=Math.hypot(...w)||1;let s=w.reduce((n,v,i)=>n+v*u[i],0)/(un*wn);if(x[1]&&train==="short")s*=.8;else if(x[1]&&train==="mid")s*=.92;st.m[c.id]=Math.round(s*100)});
+st.why=u.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]).filter(x=>x[0]>0).slice(0,3).map(x=>TN[x[1]]);
+const top=[...st.c].sort((a,b)=>st.m[b.id]-st.m[a.id]).slice(0,3),band=p=>p>=80?"Strong fit":p>=65?"Good fit":"Worth exploring";
+let saved=null;if(loggedIn()){saved=await api("/assessments",{method:"POST",body:JSON.stringify({answers:st.ans.map((a,k)=>a.map(i=>Q[k][2][i][0])),result:{country:st.cty||"XX",stage,train,strengths:st.why,top:top.map(c=>({name:c.name,match:st.m[c.id]}))},careerId:st.api?top[0].id:undefined})},45000)}
+$("#quiz").innerHTML=`<div class="q">Your top matches</div>${top.map(c=>`<p style="margin:0 0 10px"><b>${esc(c.name)}</b> – ${st.m[c.id]}% · <span class="hint">${band(st.m[c.id])}</span></p>`).join("")}<p class="hint" style="margin:14px 0">Strongest signals: ${esc(st.why.join(", "))}. ${esc(STAGE[stage])}${stage==="school"?"":" "+esc(top[0].name)+"."}${st.cty?` In ${esc(cd().n)}: ${esc(cd().entry)}`:""}</p><p class="lead" style="color:#AFC0D6">${saved&&saved.ok?"Saved to your account.":loggedIn()?esc((saved&&saved.message)||"We could not save this result."):'<a href="#" data-auth="signin" style="text-decoration:underline">Sign in</a> to save your results.'}</p><div class="row"><button class="btn sm" onclick="location.reload()">Retake</button><a class="btn or sm" href="#careers">View my careers</a></div>`;
+render();profile();location.hash="#careers"};
+
+const catsBar=()=>{$("#cats").innerHTML=["All",...new Set(st.c.map(c=>c.category))].map(c=>`<button class="cat" aria-pressed="${c===st.cat}">${esc(c)}</button>`).join("")};
+$("#cats").onclick=e=>{if(e.target.classList.contains("cat")){st.cat=e.target.textContent;catsBar();render()}};$("#search").oninput=render;
+function render(){const q=$("#search").value.toLowerCase();let l=st.c.filter(c=>(st.cat==="All"||c.category===st.cat)&&(c.name+c.description).toLowerCase().includes(q));if(st.m)l.sort((a,b)=>st.m[b.id]-st.m[a.id]);
+$("#why").className="why"+(st.m?" on":"");if(st.m)$("#why").innerHTML=`<b>Why these careers?</b> Your answers point to ${esc(st.why.join(", "))}. Percentages show how closely each career's profile matches yours. This is guidance, not a test result.`;
+const c0=cd();
+$("#list").innerHTML=l.length?l.map(c=>{const r=REG[c.name];return`<div class="item ${st.open===c.id?"open":""}"><button class="head" data-o="${c.id}" aria-expanded="${st.open===c.id}"><h3>${esc(c.name)}</h3><small>${esc(c.category)} · ${esc(c.skills.join(", "))}</small>${st.m?`<span class="pill">${st.m[c.id]}%</span>`:""}</button>
+<div class="more"><div><div class="prof"><div><h4>Overview</h4><p>${esc(c.description)}</p><h4 style="margin-top:14px">Education pathway</h4><p>${esc(c.educationPathway)}</p></div><div><h4>Subjects and qualifications</h4><p>${esc(c.qualifications)}</p><h4 style="margin-top:14px">Industries</h4><p>${esc(c.industries.join(", "))}</p></div><div><h4>Related roles</h4><p>${esc(c.relatedJobRoles.join(", "))}</p></div>
+${st.cty?`<div style="grid-column:1/-1"><h4>In ${esc(c0.n)}</h4><p>${esc(c0.entry)} ${r&&c0.i>=0?"Regulator: "+esc(r[c0.i])+".":"No professional licence is usually required; employers value skills and a portfolio."}</p></div>`:""}
+<div class="acts"><button class="btn sm tog" data-s="${c.id}" aria-pressed="${st.saved.has(c.id)}">${st.saved.has(c.id)?"Saved":"Save career"}</button><button class="btn sm tog" data-c="${c.id}" aria-pressed="${st.cmp.includes(c.id)}">Compare</button><a class="btn sm" href="#mentors">Get guidance</a></div></div></div></div></div>`}).join(""):`<div class="empty">No careers match that search. Try another word or choose All.</div>`;
+const t=$("#target");if(t&&t.options.length!==st.c.length){t.innerHTML=st.c.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");skills()}}
+$("#list").onclick=async e=>{const h=e.target.closest("[data-o]"),b=e.target.closest("[data-s],[data-c]");
+if(h)st.open=st.open===h.dataset.o?null:h.dataset.o;
+else if(b&&b.dataset.s){const id=b.dataset.s,had=st.saved.has(id);had?st.saved.delete(id):st.saved.add(id);
+if(loggedIn()){const r=await api("/careers/"+id+"/save",{method:had?"DELETE":"POST"});toast(r.ok?(had?"Removed from saved":"Career saved to your account"):r.message||"Could not update saved careers");profile()}
+else{localStorage.setItem("pw_guest",JSON.stringify([...st.saved]));toast(had?"Removed":"Saved on this device. Sign in to keep it on your account.")}}
+else if(b){const id=b.dataset.c,x=st.cmp.indexOf(id);if(x>=0)st.cmp.splice(x,1);else{if(st.cmp.length===2)st.cmp.shift();st.cmp.push(id)}compare()}
+render()};
+function compare(){const e=$("#cmp");if(st.cmp.length<2){e.innerHTML=`<p class="empty">${st.cmp.length?"Pick one more career.":"No careers selected yet."}</p>`;return}
+const [a,b]=st.cmp.map(id=>st.c.find(c=>c.id===id)),r=(l,f)=>`<tr><td>${l}</td><td>${esc(f(a))}</td><td>${esc(f(b))}</td></tr>`;
+e.innerHTML=`<table><thead><tr><th></th><th>${esc(a.name)}</th><th>${esc(b.name)}</th></tr></thead>${r("Skills",c=>c.skills.join(", "))}${r("Qualifications",c=>c.qualifications)}${r("Education",c=>c.educationPathway)}${r("Job roles",c=>c.relatedJobRoles.join(", "))}${r("Industries",c=>c.industries.join(", "))}</table>`}
+
+function skills(){const c=st.c.find(x=>x.id===$("#target").value)||st.c[0],S=c.skills;$("#skills").innerHTML=S.map((s,i)=>`<button class="skill" aria-pressed="${st.have.has(i)}" data-i="${i}"><i>${st.have.has(i)?"✓":""}</i><span>${esc(s)}</span></button>`).join("");
+const m=S.filter((_,i)=>!st.have.has(i));$("#res").innerHTML=m.length?`<b>${m.length} skill${m.length>1?"s":""} to develop.</b> Start with ${esc(m[0])}.`:`<b>Nothing missing.</b> You have every skill on this list.`}
+$("#target").onchange=()=>{st.have.clear();skills()};
+$("#skills").onclick=e=>{const b=e.target.closest(".skill");if(b){const i=+b.dataset.i;st.have.has(i)?st.have.delete(i):st.have.add(i);skills()}};
+
+const M=[["Mercy Jerome","Software engineer","Technology careers","images/mentor1.jpg"],["Frank Davies","Physician","Healthcare careers","images/mentor2.jpg"],["Bukola Larry","Brand strategist","Creative and business careers","images/mentor3.jpg"]];
+$("#mgrid").innerHTML=M.map((m,i)=>`<article class="mentor"><img src="${m[3]}" alt="Portrait of ${m[0]}"><h3>${m[0]}</h3><p>${m[1]}<br>${m[2]}</p><button class="btn sm" data-r="${i}">Request guidance</button></article>`).join("");
+$("#mgrid").onclick=e=>{const b=e.target.closest("[data-r]");if(b&&!b.disabled){b.textContent="Demo only";b.disabled=true;toast("Mentor requests are not live yet")}};
+$("#cForm").onsubmit=async e=>{e.preventDefault();const r=await api("/contact",{method:"POST",body:JSON.stringify({name:$("#cN").value,email:$("#cE").value,message:$("#cM").value})},45000);toast(r.ok?"Message sent. Thank you!":r.message||"Could not send");if(r.ok)e.target.reset()};
+$("#news").onsubmit=async e=>{e.preventDefault();const r=await api("/contact",{method:"POST",body:JSON.stringify({name:"Newsletter",email:e.target.querySelector("input").value,message:"Please add me to the PathWise newsletter."})});toast(r.ok?"Thanks for joining":r.message||"Could not join");if(r.ok)e.target.reset()};
+
+const fmtDate = d => new Date(d).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
+
+async function profile() {
+  const section = $("#profile");
+  section.hidden = !loggedIn();
+  if (!loggedIn()) return;
+  const user = pwUser();
+  $("#pInfo").textContent = [user.name, user.email, CD[user.country]?.n].filter(Boolean).join(" · ");
+  const [assessments, saved] = await Promise.all([api("/assessments"), api("/me/saved-careers")]);
+  const history = assessments.ok ? assessments.data.assessments : [];
+  const careers = saved.ok ? saved.data.careers : [];
+  $("#pLatest").innerHTML = history.length
+    ? (history[0].result?.top || []).map(t => `<p><b>${esc(t.name)}</b> – ${t.match}%</p>`).join("") + `<p class="meta">${fmtDate(history[0].createdAt)}</p>`
+    : "<p>No assessment saved yet.</p>";
+  $("#pHist").innerHTML = history.length
+    ? history.map(a => `<p>${fmtDate(a.createdAt)} – ${esc(a.result?.top?.[0]?.name || "Assessment")}</p>`).join("")
+    : "<p>Your past results will appear here.</p>";
+  $("#pSaved").innerHTML = careers.length
+    ? careers.map(c => `<p class="srow"><span>${esc(c.title)}</span><button class="btn sm" data-u="${c.id}">Remove</button></p>`).join("")
+    : "<p>Careers you save will appear here.</p>";
+}
+
+$("#pSaved").onclick = async e => {
+  const button = e.target.closest("[data-u]");
+  if (!button) return;
+  const result = await api(`/careers/${button.dataset.u}/save`, { method: "DELETE" });
+  if (!result.ok) return toast(result.message);
+  st.saved.delete(button.dataset.u);
+  profile();
+  render();
+};
+
+(async()=>{authLinks();country();quiz();catsBar();render();compare();skills();
+const [d]=await Promise.all([api("/careers"),loggedIn()?api("/auth/me"):null]);
+if(d.ok&&d.data.careers.length){st.api=true;try{st.c=d.data.careers.map(c=>{const x=c.detailsJson?JSON.parse(c.detailsJson):{};return{...x,id:c.id,name:c.title,category:c.category||x.category,description:c.description}});st.saved=new Set;catsBar();render();skills()}catch{}}
+if(loggedIn()){const sv=await api("/me/saved-careers");if(sv.ok){sv.data.careers.forEach(c=>st.saved.add(c.id));render()}authLinks();profile()}})();
+
+</script>
+</body>
+</html>
